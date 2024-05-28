@@ -159,7 +159,7 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-#csv or txt
+#data related files
 df_final_web_data_pt_2.txt
 df_final_web_data_pt_1.txt
-
+full_ab_data.pkl
