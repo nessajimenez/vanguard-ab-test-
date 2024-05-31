@@ -201,11 +201,14 @@ END;
 WITH time AS (
     SELECT 
         visit_id,
-        client_id,
+        interactions.client_id,
         process_step,
         date_time,
-        LEAD(date_time) OVER (PARTITION BY visit_id, client_id ORDER BY process_step) AS next_step_time
+        group_id.variation AS variation,
+        LEAD(date_time) OVER (PARTITION BY visit_id, client_id ORDER BY date_time) AS next_step_time
     FROM interactions
+    JOIN group_id
+    ON group_id.client_id = interactions.client_id
 )
 SELECT 
     visit_id,
@@ -213,27 +216,53 @@ SELECT
     process_step,
     date_time,
     next_step_time,
-    TIMESTAMPDIFF(SECOND, date_time, next_step_time) AS time_difference_seconds
+    TIMESTAMPDIFF(SECOND, date_time, next_step_time) AS time_difference_seconds,
+    variation
 FROM time
 GROUP BY visit_id,
     client_id,
     process_step, 
     date_time,
     next_step_time,
-    time_difference_seconds
+    time_difference_seconds,
+    variation 
 ORDER BY client_id, 
 		visit_id, 
-        process_step, 
-        date_time;
+        date_time,
+        process_step 
+        ;
 
-
-
--- problem is it's just showing me the same value twice, unless people went back to that step.
+-- how many times people were on each step (considered an error if on one step more than once)
 SELECT 
-        visit_id,
-        client_id,
-        process_step,
-        MIN(TIME(date_time)) AS min_time,
-        MAX(TIME(date_time)) AS max_time
-    FROM interactions
-    GROUP BY client_id, visit_id, process_step;
+    visit_id,
+    client_id,
+    process_step,
+    COUNT(*) AS step_count
+FROM interactions
+GROUP BY 
+    visit_id,
+    client_id,
+    process_step
+ORDER BY 
+    client_id,
+    visit_id,
+    process_step;
+    
+    
+    
+
+SELECT 
+    visit_id,
+    client_id,
+    process_step,
+    COUNT(*) AS step_count
+FROM interactions
+GROUP BY 
+    visit_id,
+    client_id,
+    process_step
+ORDER BY 
+    client_id,
+    visit_id,
+    process_step;
+
