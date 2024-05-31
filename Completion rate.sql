@@ -5,7 +5,7 @@ SELECT clients.client_id, COUNT(process_step)
 FROM clients
 JOIN interactions
 ON clients.client_id = interactions.client_id
-WHERE interactions.process_step = 'confirm'
+WHERE interactions.process_step = '4'
 GROUP BY clients.client_id;
 
 -- Completion Rate: clients that did not reach the 'confirm' step: 22,809
@@ -17,7 +17,7 @@ WHERE clients.client_id NOT IN (SELECT clients.client_id
 								FROM clients
 								JOIN interactions
 								ON clients.client_id = interactions.client_id
-								WHERE interactions.process_step = 'confirm')
+								WHERE interactions.process_step = '4')
 GROUP BY clients.client_id;
 
 --  Approx. 68% of people reached the confirm step
@@ -29,7 +29,7 @@ JOIN interactions
 ON clients.client_id = interactions.client_id
 JOIN group_id
 ON group_id.client_id = interactions.client_id
-WHERE interactions.process_step = 'confirm' AND group_id.variation = 'Test'
+WHERE interactions.process_step = '4' AND group_id.variation = 'Test'
 GROUP BY clients.client_id;
 
 -- 8281 people in the test did not complete the process
@@ -45,7 +45,7 @@ WHERE group_id.variation = 'Test' AND group_id.client_id NOT IN (SELECT clients.
 																ON clients.client_id = interactions.client_id
 																JOIN group_id
 																ON group_id.client_id = interactions.client_id
-																WHERE interactions.process_step = 'confirm' AND group_id.variation = 'Test')
+																WHERE interactions.process_step = '4' AND group_id.variation = 'Test')
 GROUP BY clients.client_id;
 
 -- 15434 people in the control group completed the process
@@ -55,7 +55,7 @@ JOIN interactions
 ON clients.client_id = interactions.client_id
 JOIN group_id
 ON group_id.client_id = interactions.client_id
-WHERE interactions.process_step = 'confirm' AND group_id.variation = 'Control'
+WHERE interactions.process_step = '4' AND group_id.variation = 'Control'
 GROUP BY clients.client_id;
 
 -- 8098 people in the control group did not complete the process
@@ -71,7 +71,7 @@ WHERE group_id.variation = 'Control' AND clients.client_id NOT IN (SELECT client
 																ON clients.client_id = interactions.client_id
 																JOIN group_id
 																ON group_id.client_id = interactions.client_id
-																WHERE interactions.process_step = 'confirm' AND group_id.variation = 'Control')
+																WHERE interactions.process_step = '4' AND group_id.variation = 'Control')
 GROUP BY clients.client_id;
 
 -- 26,968 were IN the test group
@@ -117,35 +117,6 @@ ON clients.client_id = interactions.client_id
 JOIN group_id
 ON group_id.client_id = interactions.client_id
 WHERE group_id.variation = 'Control';
-
-
--- WITH StepDurations AS (
---     SELECT 
---         a.client_id,
---         b.process_step AS current_step,
---         MIN(b.date_time) AS next_step_time,
---         TIMESTAMPDIFF(SECOND, a.date_time, MIN(b.date_time)) AS duration_seconds
---     FROM 
---         interactions a
---     LEFT JOIN 
---         interactions b
---     ON 
---         a.client_id = b.client_id
---         AND a.date_time < b.date_time
---     GROUP BY 
---         a.client_id, b.process_step, a.date_time
--- )
-
--- SELECT 
---     current_step,
---     AVG(duration_seconds) AS average_duration_seconds
--- FROM 
---     StepDurations
--- GROUP BY 
---     current_step
--- ORDER BY 
---     current_step;
-    
     
 -- How far each person got in the process    
 SELECT clients.client_id,
@@ -189,4 +160,80 @@ ON group_id.client_id = clients.client_id
 GROUP BY clients.client_id, interactions.visit_id,
 	clients.clnt_age, 
     clients.gendr, 
-    group_id.variation ;
+    group_id.variation 
+ORDER BY clients.client_id;
+
+-- the count of how many times each client attempted a step, regardless of visit
+SELECT clients.client_id,
+		interactions.process_step,
+        count(interactions.process_step) AS step_attempts
+FROM clients
+JOIN interactions
+ON clients.client_id = interactions.client_id
+GROUP BY process_step, client_id;
+
+-- number of visits per client
+#CREATE TEMPORARY TABLE visits AS
+SELECT interactions.client_id AS client_id,
+		count(visit_id) AS num_of_visits
+FROM interactions
+JOIN group_id
+ON group_id.client_id = interactions.client_id
+GROUP BY interactions.client_id
+ORDER BY client_id;
+
+-- 6.25 average visits per client
+SELECT AVG(visits.num_of_visits)
+FROM visits;
+
+-- change steps to a logical order
+UPDATE interactions
+SET process_step = CASE 
+    WHEN process_step = 'start' THEN '0'
+    WHEN process_step = 'step_1' THEN '1'
+    WHEN process_step = 'step_2' THEN '2'
+    WHEN process_step = 'step_3' THEN '3'
+    WHEN process_step = 'confirm' THEN '4'
+    ELSE process_step
+END;
+
+-- how much time each client spent on each step by second
+WITH time AS (
+    SELECT 
+        visit_id,
+        client_id,
+        process_step,
+        date_time,
+        LEAD(date_time) OVER (PARTITION BY visit_id, client_id ORDER BY process_step) AS next_step_time
+    FROM interactions
+)
+SELECT 
+    visit_id,
+    client_id,
+    process_step,
+    date_time,
+    next_step_time,
+    TIMESTAMPDIFF(SECOND, date_time, next_step_time) AS time_difference_seconds
+FROM time
+GROUP BY visit_id,
+    client_id,
+    process_step, 
+    date_time,
+    next_step_time,
+    time_difference_seconds
+ORDER BY client_id, 
+		visit_id, 
+        process_step, 
+        date_time;
+
+
+
+-- problem is it's just showing me the same value twice, unless people went back to that step.
+SELECT 
+        visit_id,
+        client_id,
+        process_step,
+        MIN(TIME(date_time)) AS min_time,
+        MAX(TIME(date_time)) AS max_time
+    FROM interactions
+    GROUP BY client_id, visit_id, process_step;
