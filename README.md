@@ -1,2 +1,5 @@
-# vanguard-digital-project
-Data analysis project by Danielle Steede and Vanessa Jimenez
+# Vanguard-Digital-Project
+
+Digital experiment performance analysis by Danielle Steede, Daniela Rivera and Vanessa Jimenez
+
+## Introduction
