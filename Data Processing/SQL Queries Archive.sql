@@ -1,3 +1,6 @@
+-- This file includes all the SQL queries we used throughout the processing and analysis of the data.
+
+
 USE vanguard;
 
 -- Completion Rate: clients that reached the 'confirm' step" 47,800
@@ -198,6 +201,7 @@ SET process_step = CASE
 END;
 
 -- how much time each client spent on each step by second
+CREATE TEMPORARY TABLE time_spent
 WITH time AS (
     SELECT 
         visit_id,
@@ -232,6 +236,11 @@ ORDER BY client_id,
         process_step 
         ;
 
+-- average time spent across all activity per client
+SELECT client_id, process_step, AVG(time_difference_seconds) AS 'average_spent'
+FROM time_spent
+GROUP BY client_id, process_step;
+
 -- how many times people were on each step (considered an error if on one step more than once)
 SELECT 
     visit_id,
@@ -255,8 +264,11 @@ SELECT
     visit_id,
     client_id,
     process_step,
+    group_id.variation,
     COUNT(*) AS step_count
 FROM interactions
+JOIN group_id
+ON group_id.variation = 
 GROUP BY 
     visit_id,
     client_id,
@@ -266,3 +278,252 @@ ORDER BY
     visit_id,
     process_step;
 
+-- this tells us how many total interactions regardless of which step or visit and how many times, all clients had.
+WITH total_interactions AS (
+								SELECT 
+									clients.client_id,
+									interactions.visit_id,
+									interactions.process_step,
+									COUNT(interactions.process_step) AS step_count
+								FROM 
+									clients
+								JOIN 
+									interactions ON clients.client_id = interactions.client_id
+								GROUP BY 
+									clients.client_id,
+									interactions.visit_id,
+									interactions.process_step)
+SELECT sum(step_count)
+FROM total_interactions;                                    
+
+
+-- how many total errors, if error is doing a step during a visit more than once.
+WITH error_search AS(
+						SELECT 
+							clients.client_id,
+							interactions.visit_id,
+							interactions.process_step,
+							COUNT(interactions.process_step) AS step_count
+						FROM 
+							clients
+						JOIN 
+							interactions ON clients.client_id = interactions.client_id
+						GROUP BY 
+							clients.client_id,
+							interactions.visit_id,
+							interactions.process_step
+						HAVING 
+							COUNT(interactions.process_step) >1
+						)
+SELECT client_id,
+		visit_id,
+		process_step,
+		step_count
+FROM error_search
+GROUP BY 
+		client_id,
+		visit_id,
+		process_step
+;
+
+
+-- error steps by test or control group
+WITH error_search AS(
+						SELECT 
+							clients.client_id,
+							interactions.visit_id,
+							interactions.process_step,
+							COUNT(interactions.process_step) AS step_count
+						FROM 
+							clients
+						JOIN 
+							interactions ON clients.client_id = interactions.client_id
+						JOIN group_id ON group_id.client_id = interactions.client_id
+						WHERE group_id.variation = 'Control'
+                        GROUP BY 
+							clients.client_id,
+							interactions.visit_id,
+							interactions.process_step
+						
+                        HAVING 
+							COUNT(interactions.process_step) >1
+						)
+SELECT client_id,
+		visit_id,
+		process_step,
+		step_count
+FROM error_search
+GROUP BY 
+		client_id,
+		visit_id,
+		process_step
+;
+
+
+
+-- avg error steps by test or control group
+WITH error_search AS(
+						SELECT 
+							clients.client_id,
+							interactions.visit_id,
+							interactions.process_step,
+							COUNT(interactions.process_step) AS step_count
+						FROM 
+							clients
+						JOIN 
+							interactions ON clients.client_id = interactions.client_id
+						JOIN group_id ON group_id.client_id = interactions.client_id
+						WHERE group_id.variation = 'Test'
+                        GROUP BY 
+							clients.client_id,
+							interactions.visit_id,
+							interactions.process_step
+						
+                        HAVING 
+							COUNT(interactions.process_step) >1
+						)
+SELECT avg(step_count)
+FROM error_search;
+
+
+
+SELECT 
+    clients.client_id,
+    interactions.visit_id,
+    interactions.process_step,
+    group_id.variation,
+    COUNT(*) AS attempts
+FROM clients
+JOIN interactions ON clients.client_id = interactions.client_id
+JOIN group_id ON group_id.client_id = clients.client_id
+WHERE group_id.variation IN ('Control', 'Test')
+GROUP BY 
+    clients.client_id,
+    interactions.visit_id,
+    interactions.process_step,
+    group_id.variation
+HAVING COUNT(*) > 1;
+    
+SELECT client_id, visit_id, process_step, COUNT(*) AS attempts
+FROM interactions
+GROUP BY client_id, visit_id, process_step
+HAVING COUNT(*) > 1;
+
+
+SELECT 
+    COUNT(*) AS total_attempts,
+    SUM(CASE WHEN attempts > 1 THEN 1 ELSE 0 END) AS error_attempts,
+    SUM(CASE WHEN attempts > 1 THEN 1 ELSE 0 END) / COUNT(*) AS error_rate
+FROM (
+    SELECT 
+        clients.client_id,
+        interactions.visit_id,
+        interactions.process_step,
+        group_id.variation,
+        COUNT(*) AS attempts
+    FROM clients
+    JOIN interactions ON clients.client_id = interactions.client_id
+    JOIN group_id ON group_id.client_id = clients.client_id
+    WHERE group_id.variation IN ('Control', 'Test')
+    GROUP BY 
+        clients.client_id,
+        interactions.visit_id,
+        interactions.process_step,
+        group_id.variation
+) AS subquery;
+
+
+SELECT 
+    clients.client_id,
+    interactions.visit_id,
+    interactions.process_step,
+    group_id.variation
+FROM clients
+JOIN interactions ON clients.client_id = interactions.client_id
+JOIN group_id ON group_id.client_id = clients.client_id
+WHERE group_id.variation = 'Control'
+    AND clients.client_id IN (
+        SELECT DISTINCT clients.client_id
+        FROM clients
+        JOIN interactions ON clients.client_id = interactions.client_id
+        WHERE interactions.process_step = '4'
+    );
+    
+    SELECT 
+    clients.client_id,
+    interactions.visit_id,
+    interactions.process_step,
+    group_id.variation
+FROM clients
+JOIN interactions ON clients.client_id = interactions.client_id
+JOIN group_id ON group_id.client_id = clients.client_id
+WHERE group_id.variation = 'Test'
+    AND clients.client_id IN (
+        SELECT DISTINCT clients.client_id
+        FROM clients
+        JOIN interactions ON clients.client_id = interactions.client_id
+        WHERE interactions.process_step = '4'
+    );
+    
+        SELECT 
+    clients.client_id,
+    interactions.visit_id,
+    interactions.process_step,
+    group_id.variation
+FROM clients
+JOIN interactions ON clients.client_id = interactions.client_id
+JOIN group_id ON group_id.client_id = clients.client_id
+WHERE group_id.variation = 'Test'
+    AND clients.client_id IN (
+        SELECT DISTINCT clients.client_id 
+        FROM clients
+        JOIN interactions ON clients.client_id = interactions.client_id
+        WHERE interactions.process_step = '4'
+    );
+    
+    
+SELECT 
+    clients.client_id,
+    interactions.visit_id,
+    interactions.process_step,
+    group_id.variation,
+    COUNT(*) AS attempts
+FROM clients
+JOIN interactions ON clients.client_id = interactions.client_id
+JOIN group_id ON group_id.client_id = clients.client_id
+WHERE group_id.variation IN ('Control', 'Test')
+ AND clients.client_id IN (
+        SELECT DISTINCT clients.client_id 
+        FROM clients
+        JOIN interactions ON clients.client_id = interactions.client_id
+        WHERE interactions.process_step = '4')
+GROUP BY 
+    clients.client_id,
+    interactions.visit_id,
+    interactions.process_step,
+    group_id.variation;
+
+
+
+
+SELECT 
+    clients.client_id,
+    interactions.visit_id,
+    interactions.process_step,
+    group_id.variation,
+    COUNT(*) AS attempts
+FROM clients
+JOIN interactions ON clients.client_id = interactions.client_id
+JOIN group_id ON group_id.client_id = clients.client_id
+WHERE group_id.variation IN ('Control', 'Test')
+ AND clients.client_id IN (
+        SELECT DISTINCT clients.client_id 
+        FROM clients
+        JOIN interactions ON clients.client_id = interactions.client_id
+        WHERE interactions.process_step = '4')
+GROUP BY 
+    clients.client_id,
+    interactions.visit_id,
+    interactions.process_step,
+    group_id.variation
+HAVING COUNT(*) > 1;
