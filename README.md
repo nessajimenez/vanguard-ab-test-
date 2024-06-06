@@ -125,5 +125,7 @@ After analyzing the clients' general demographic:
 ## URLs
 
   > [Trello Page](https://trello.com/b/ML7qcsgb/ab-testing-project)
+
   > [Presentation](https://docs.google.com/presentation/d/1pLHLWKppZoJPrDlbW2V0Y_iscmFyLrW0fJaK2npPG48/edit#slide=id.p)
+
   > [Tableau](https://public.tableau.com/app/profile/daniela.rivera4024/viz/VanguardVisuals/AbandonmentRateTEST)
