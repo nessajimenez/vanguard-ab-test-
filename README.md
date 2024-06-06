@@ -54,7 +54,7 @@ Was the new design created by the Customer Experiment team successful in increas
 
   > Data Cleaning & Transformation
 
-    [Merged and Cleaned Data](full_data.csv.zip)
+  [Merged and Cleaned Data](full_data.csv.zip)
 
   > Performance Metrics (KPIs)
 
