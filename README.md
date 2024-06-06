@@ -124,9 +124,9 @@ After analyzing the clients' general demographic:
 
 After looking at all the data collected and our analysis as a whole:
 
-### Design Effectiveness
+### Design Effectiveness Feedback
    
-   > Experiment Structure:
+####  Experiment Structure:
   
    > The number of clients for each group should be the same. 
 
