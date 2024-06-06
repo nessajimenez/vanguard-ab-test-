@@ -78,17 +78,17 @@ After analyzing the clients' general demographic:
 
 ### Conclusions for KPIs
 
-  #### > Completion Rate
+  ####  Completion Rate
 
      - Although there was an increase in completion rate (3.7%) for the test group, it is not enough for it to be statistically significant and it did not exceed the 5% threshhold set by Vanguard.
 
-  #### > Abandonment Rate
+  ####  Abandonment Rate
 
     - The amount of people that gave up at the start step and during step 3 vs the other steps indicate these two pages/steps in the process need to be evaluated for improvements because they are contributing the most to abandonment.
 
     - Although the test group did in fact have a lower overall abandonment rate (especially during 'step 1' (9% abandonment rate for Test vs. 13% for Control), the difference was not enough to deem successful.
 
-  #### > Time Spent on each Step
+  ####  Time Spent on each Step
 
     - In both variations, the average time spent on each step was longer as the client moved through the steps. This could be a defining factor if we want to reduce abandonment rate.
     
@@ -100,7 +100,7 @@ After analyzing the clients' general demographic:
     
     - From the data, we don't know if time spent on each step includes loading times. A good design should prioritize keeping loading times as small as possible. It would be interesting to collect data on loading times of the pages as part of the experiment.
 
-  #### > Error Rates
+  ####  Error Rates
 
     - We define interaction as: activity or engagement between the client and the step in the process being analyzed. So attempting a step 3 or 4 times is one interaction.
     
@@ -118,7 +118,7 @@ After analyzing the clients' general demographic:
     
     - Any observed difference in error rates between the control and test groups is NOT attributed to random chance or sampling variability.
 
-  #### > Tenure Year
+  ####  Tenure Year
 
     - The average client tenure between the control and test groups shows that there is no significant difference in the average tenure years between the two groups.
     
@@ -136,11 +136,11 @@ After looking at all the data collected and our analysis as a whole:
   
    > The number of clients for each group should be the same. 
 
-      > It simplifies analysis
+      - It simplifies analysis
       
-      > Minimizes bias (one group had more clients than the other)
+      - Minimizes bias (one group had more clients than the other)
       
-      > Ensures statistical power
+      - Ensures statistical power
  
   > Why were there so many unknown genders? 
 
