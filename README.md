@@ -120,7 +120,39 @@ After analyzing the clients' general demographic:
     
     - Therefore, based on this observation, there isn't enough evidence to support rejecting the null hypothesis that the duration of clients does not significantly alter between the control and test groups.
 
-## Further Questions
+    ## Conclusions Experiment Design
+
+After looking at all the data collected and our analysis as a whole:
+
+### Design Effectiveness
+   
+   > Experiment Structure:
+  
+   > The number of clients for each group should be the same. 
+
+      > - It simplifies analysis
+      
+      > - Minimizes bias (one group had more clients than the other)
+      
+      > - Ensures statistical power
+ 
+  > Why were there so many unknown genders?
+
+#### Duration Assessment
+   
+   > - Although a 3 month timeframe was enough to gather suffincient data for this particular experiment, a longer timeframe (6 months) would most likely provide more accurate numbers. 
+   
+   > - The most important factor to consider is the size of the sample the company wants to evaluate. 
+
+#### Additional Data Needs or Recomendations
+   
+   > - It would help to analyze the content and questions being displayed/requested in each step. 
+   
+   > - Is all the data being collected during the process necessary? 
+   
+   > - Are we making the client take more steps than needed or asking for duplicate info? Can we eliminate any steps and make the process shorter?
+   
+   > - Create a survey for customer feedback
 
 ## URLs
 
