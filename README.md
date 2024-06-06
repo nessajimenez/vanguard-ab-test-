@@ -32,7 +32,7 @@ The following datasets were essential for our analysis:
 
 ## Problem & Hypotheses
 
-Did the new design created by the Customer Experiment team successful in increasing overall client engagement and potential revenue for Vanguard?
+Was the new design created by the Customer Experiment team successful in increasing overall client engagement and potential revenue for Vanguard?
 
 > Completion Rate
   > Did more clients reach the confirm step in the test group than the control group?
@@ -54,13 +54,15 @@ Did the new design created by the Customer Experiment team successful in increas
 
   > Data Cleaning & Transformation
 
+  [Merged and Cleaned Data](full_data.csv.zip)
+
   > Performance Metrics (KPIs)
 
   > Hypothesis Testing
 
   > Experiment Evaluation
 
-  > Tableau
+  > Tableau Page for Visualizations
 
 ## Conclusions
 
@@ -70,57 +72,61 @@ After analyzing the clients' general demographic:
 
   > The average age and client tenure are evenly distributed in both the control and test groups. On average, the clients were middle age (51-52 yo) and have been with the company for 15 years.
 
-  > Although male and female clients seem to be evenly distributed for both groups, there are too many clients with unknown gender for us to make any conclusions or corellations related to gender.
+  > Although male and female clients seem to be evenly distributed for both groups, there are too many clients with unknown gender for us to draw any conclusions or corellations related to gender.
 
   > Despite the number of unknown genders, we believe the clients were divided equally between the two designs in order to get the best results.
 
 ### Conclusions for KPIs
 
-  #### > Completion Rate
+  ####  Completion Rate
 
-     - Although there was an increase in completion rate (3.7%) for the test group, it is not enough for it to be statistically significant and it did not exceed the 5% threshhold set by Vanguard.
+- Although there was an increase in completion rate (3.7%) for the test group, it is not enough for it to be statistically significant and it did not exceed the 5% threshhold set by Vanguard.
 
-  #### > Abandonment Rate
+  ####  Abandonment Rate
 
-    - The amount of people lost at start and step 3 vs the other steps indicate these two pages/steps in the process need to be evaluated for improvements because they are contributing the most to abandonment.
+- The amount of people that gave up at the start step and during step 3 vs the other steps indicate these two pages/steps in the process need to be evaluated for improvements because they are contributing the most to abandonment.
 
-  #### > Time Spent on each Step
+- Although the test group did in fact have a lower overall abandonment rate (especially during 'step 1' (9% abandonment rate for Test vs. 13% for Control), the difference was not enough to deem successful.
 
-    - In both variations, the average time spent on each step was longer as the client moved through the steps. This could be a defining factor if we want to reduce abandonment rate.
+  ####  Time Spent on each Step
+
+- In both variations, the average time spent on each step was longer as the client moved through the steps. This could be a defining factor if we want to reduce abandonment rate.
     
-    - In the test group, the average time a client spent to reach confirmation was 9.7 minutes. However, the average time for the control group was 8.3 minutes. The main difference between the two groups is in the final (confirmation) step, which took much longer (on average) for the test group than it did for the control group.
+- In the test group, the average time a client spent from beginning to end was 9.7 minutes. However, the average time for the control group was 8.3 minutes. The main difference between the two groups is in the final (confirmation) step, which took much longer (on average) for the test group than it did for the control group. For this reason, we must reject our initial hypothesis in believing the test group would go through the process at a quicker time.
     
-    - It is important to note that, in both groups, for confirmation step had many null values, which affect the average time. Why is that? Was there something added to the test group once the client completed the steps? More information needs to be gathered to get a better understanding of the process.
+- It is important to note that, in both groups, the confirmation step had many null values, which affect the average time. Why is that? 
     
-    - From the data, we don't know if time spent on each step includes loading times. A good design should prioritize keeping loading times as small as possible. It would be interesting to collect data on loading times of the pages as part of the experiment.
+- What was added to the new design (if anything) once the client completed the steps? More information needs to be gathered to get a better understanding of the process.
+    
+- From the data, we don't know if time spent on each step includes loading times. A good design should prioritize keeping loading times as small as possible. It would be interesting to collect data on loading times of the pages as part of the experiment.
 
-  #### > Error Rates
+  ####  Error Rates
 
-    - We define interaction as: activity or engagement between the client and the step in the process being analyzed. So attempting step 3 4 times is one interaction.
+- We define interaction as: activity or engagement between the client and the step in the process being analyzed. So attempting a step 3 or 4 times is one interaction.
     
-    - We define error as an interaction with a step attempt higher than 1, indicating possible confusion or errors. So attempting step 3 4 times is considered an error.
+- We define error as an interaction with a step attempt higher than 1, indicating possible confusion or errors. So attempting a step 3 or 4 times is considered an error.
     
-    - We define non-error as an interaction with a step attempt equal to 1. So attempting step 3 one time is considered non-error, even if they abandon the process at that step.
+- We define non-error as an interaction with a step attempt equal to 1. So attempting 'step 3' one time is considered non-error, even if they abandon the process at that step.
       
-      - The error rate for the test group is: 22.46%
+  - The error rate for the test group is: 22.46%
 
-      - The error rate for the control group is: 19.61%
+  - The error rate for the control group is: 19.61%
 
-    - The control group had a lower error rate than the test group, meaning the control group was less likely to visit a step more than once. This could be due to previous familiarity with the process, where in the test group the process has changes to what they're used to.
+- The control group had a lower error rate than the test group, meaning the control group was less likely to visit a step more than once. This could be due to previous familiarity with the process, where in the test group the process has changed from what they're used to. As a result, we must reject our initial hypothesis.
     
-    - There is a statistically significant difference in the proportions of errors between the control and test groups.
+- There is a statistically significant difference in the proportions of errors between the control and test groups.
     
-    - Any observed difference in error rates between the control and test groups is NOT attributed to random chance or sampling variability.
+- Any observed difference in error rates between the control and test groups is NOT attributed to random chance or sampling variability.
 
-  #### > Tenure Year
+  ####  Tenure Year
 
-    - The average client tenure between the control and test groups shows that there is no significant difference in the average tenure years between the two groups.
+- The average client tenure between the control and test groups shows that there is no significant difference in the average tenure years between the two groups.
     
-    - Both the control and test groups have similar average tenure years, indicating that the updated interface did not notably affect client tenure compared to the traditional process (represented by the control group).
+- Both the control and test groups have similar average tenure years, indicating that the updated interface did not notably affect client tenure compared to the traditional process (represented by the control group).
     
-    - Therefore, based on this observation, there isn't enough evidence to support rejecting the null hypothesis that the duration of clients does not significantly alter between the control and test groups.
+- Therefore, based on this observation, there isn't enough evidence to support rejecting the null hypothesis that the duration of clients does not significantly alter between the control and test groups.
 
-    ## Conclusions Experiment Design
+## Conclusions Experiment Design
 
 After looking at all the data collected and our analysis as a whole:
 
@@ -130,29 +136,29 @@ After looking at all the data collected and our analysis as a whole:
   
    > The number of clients for each group should be the same. 
 
-      > - It simplifies analysis
+      - It simplifies analysis
       
-      > - Minimizes bias (one group had more clients than the other)
+      - Minimizes bias (one group had more clients than the other)
       
-      > - Ensures statistical power
+      - Ensures statistical power
  
-  > Why were there so many unknown genders?
+  > Why were there so many unknown genders? 
 
 #### Duration Assessment
    
-   > - Although a 3 month timeframe was enough to gather suffincient data for this particular experiment, a longer timeframe (6 months) would most likely provide more accurate numbers. 
+   >  We believe a 3 month timeframe was enough to gather suffincient data for this particular experiment.
    
-   > - The most important factor to consider is the size of the sample the company wants to evaluate. 
+   >  The most important factor to consider is the size of the sample the company wants to evaluate. 
 
 #### Additional Data Needs or Recomendations
    
-   > - It would help to analyze the content and questions being displayed/requested in each step. 
+   > It would help to analyze the content and questions being displayed/requested in each step. 
    
-   > - Is all the data being collected during the process necessary? 
+   > Is all the data being collected during the process necessary? 
    
-   > - Are we making the client take more steps than needed or asking for duplicate info? Can we eliminate any steps and make the process shorter?
+   > Are we making the client take more steps than needed or asking for duplicate info? Can we eliminate any steps and make the process shorter?
    
-   > - Create a survey for customer feedback
+   > Create a survey for customer feedback regarding any changes they wish to see in the new design
 
 ## URLs
 
