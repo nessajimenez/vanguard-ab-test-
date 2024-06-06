@@ -50,7 +50,7 @@ Did the new design created by the Customer Experiment team successful in increas
   > Is the new design more "user friendly" so that clients don't have to go back to previous steps due to any confusion?
   > We believe in the new design clients won't have to go back to previous steps as much as in the control
 
-## Methodology
+## Methodology Used
 
   > Data Cleaning & Transformation
 
@@ -76,15 +76,15 @@ After analyzing the clients' general demographic:
 
 ### Conclusions for KPIs
 
-  > Completion Rate
+  #### > Completion Rate
 
      - Although there was an increase in completion rate (3.7%) for the test group, it is not enough for it to be statistically significant and it did not exceed the 5% threshhold set by Vanguard.
 
-  > Abandonment Rate
+  #### > Abandonment Rate
 
     - The amount of people lost at start and step 3 vs the other steps indicate these two pages/steps in the process need to be evaluated for improvements because they are contributing the most to abandonment.
 
-  > Time Spent on each Step
+  #### > Time Spent on each Step
 
     - In both variations, the average time spent on each step was longer as the client moved through the steps. This could be a defining factor if we want to reduce abandonment rate.
     
@@ -94,7 +94,7 @@ After analyzing the clients' general demographic:
     
     - From the data, we don't know if time spent on each step includes loading times. A good design should prioritize keeping loading times as small as possible. It would be interesting to collect data on loading times of the pages as part of the experiment.
 
-  > Error Rates
+  #### > Error Rates
 
     - We define interaction as: activity or engagement between the client and the step in the process being analyzed. So attempting step 3 4 times is one interaction.
     
@@ -112,7 +112,7 @@ After analyzing the clients' general demographic:
     
     - Any observed difference in error rates between the control and test groups is NOT attributed to random chance or sampling variability.
 
-  > Tenure Year
+  #### > Tenure Year
 
     - The average client tenure between the control and test groups shows that there is no significant difference in the average tenure years between the two groups.
     
@@ -122,6 +122,8 @@ After analyzing the clients' general demographic:
 
 ## Further Questions
 
-## URLs (PPT, Trello, Tableau Page)
+## URLs
 
-
+  > [Trello Page](https://trello.com/b/ML7qcsgb/ab-testing-project)
+  > [Presentation](https://docs.google.com/presentation/d/1pLHLWKppZoJPrDlbW2V0Y_iscmFyLrW0fJaK2npPG48/edit#slide=id.p)
+  > [Tableau](https://public.tableau.com/app/profile/daniela.rivera4024/viz/VanguardVisuals/AbandonmentRateTEST)
