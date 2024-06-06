@@ -54,7 +54,7 @@ Was the new design created by the Customer Experiment team successful in increas
 
   > Data Cleaning & Transformation
 
-    > [Merged and Cleaned Data]()
+    [Merged and Cleaned Data](full_data.csv.zip)
 
   > Performance Metrics (KPIs)
 
@@ -80,51 +80,51 @@ After analyzing the clients' general demographic:
 
   ####  Completion Rate
 
-     - Although there was an increase in completion rate (3.7%) for the test group, it is not enough for it to be statistically significant and it did not exceed the 5% threshhold set by Vanguard.
+- Although there was an increase in completion rate (3.7%) for the test group, it is not enough for it to be statistically significant and it did not exceed the 5% threshhold set by Vanguard.
 
   ####  Abandonment Rate
 
-    - The amount of people that gave up at the start step and during step 3 vs the other steps indicate these two pages/steps in the process need to be evaluated for improvements because they are contributing the most to abandonment.
+- The amount of people that gave up at the start step and during step 3 vs the other steps indicate these two pages/steps in the process need to be evaluated for improvements because they are contributing the most to abandonment.
 
-    - Although the test group did in fact have a lower overall abandonment rate (especially during 'step 1' (9% abandonment rate for Test vs. 13% for Control), the difference was not enough to deem successful.
+- Although the test group did in fact have a lower overall abandonment rate (especially during 'step 1' (9% abandonment rate for Test vs. 13% for Control), the difference was not enough to deem successful.
 
   ####  Time Spent on each Step
 
-    - In both variations, the average time spent on each step was longer as the client moved through the steps. This could be a defining factor if we want to reduce abandonment rate.
+- In both variations, the average time spent on each step was longer as the client moved through the steps. This could be a defining factor if we want to reduce abandonment rate.
     
-    - In the test group, the average time a client spent from beginning to end was 9.7 minutes. However, the average time for the control group was 8.3 minutes. The main difference between the two groups is in the final (confirmation) step, which took much longer (on average) for the test group than it did for the control group. For this reason, we must reject our initial hypothesis in believing the test group would go through the process at a quicker time.
+- In the test group, the average time a client spent from beginning to end was 9.7 minutes. However, the average time for the control group was 8.3 minutes. The main difference between the two groups is in the final (confirmation) step, which took much longer (on average) for the test group than it did for the control group. For this reason, we must reject our initial hypothesis in believing the test group would go through the process at a quicker time.
     
-    - It is important to note that, in both groups, the confirmation step had many null values, which affect the average time. Why is that? 
+- It is important to note that, in both groups, the confirmation step had many null values, which affect the average time. Why is that? 
     
-    - What was added to the new design (if anything) once the client completed the steps? More information needs to be gathered to get a better understanding of the process.
+- What was added to the new design (if anything) once the client completed the steps? More information needs to be gathered to get a better understanding of the process.
     
-    - From the data, we don't know if time spent on each step includes loading times. A good design should prioritize keeping loading times as small as possible. It would be interesting to collect data on loading times of the pages as part of the experiment.
+- From the data, we don't know if time spent on each step includes loading times. A good design should prioritize keeping loading times as small as possible. It would be interesting to collect data on loading times of the pages as part of the experiment.
 
   ####  Error Rates
 
-    - We define interaction as: activity or engagement between the client and the step in the process being analyzed. So attempting a step 3 or 4 times is one interaction.
+- We define interaction as: activity or engagement between the client and the step in the process being analyzed. So attempting a step 3 or 4 times is one interaction.
     
-    - We define error as an interaction with a step attempt higher than 1, indicating possible confusion or errors. So attempting a step 3 or 4 times is considered an error.
+- We define error as an interaction with a step attempt higher than 1, indicating possible confusion or errors. So attempting a step 3 or 4 times is considered an error.
     
-    - We define non-error as an interaction with a step attempt equal to 1. So attempting 'step 3' one time is considered non-error, even if they abandon the process at that step.
+- We define non-error as an interaction with a step attempt equal to 1. So attempting 'step 3' one time is considered non-error, even if they abandon the process at that step.
       
-      - The error rate for the test group is: 22.46%
+  - The error rate for the test group is: 22.46%
 
-      - The error rate for the control group is: 19.61%
+  - The error rate for the control group is: 19.61%
 
-    - The control group had a lower error rate than the test group, meaning the control group was less likely to visit a step more than once. This could be due to previous familiarity with the process, where in the test group the process has changed from what they're used to. As a result, we must reject our initial hypothesis.
+- The control group had a lower error rate than the test group, meaning the control group was less likely to visit a step more than once. This could be due to previous familiarity with the process, where in the test group the process has changed from what they're used to. As a result, we must reject our initial hypothesis.
     
-    - There is a statistically significant difference in the proportions of errors between the control and test groups.
+- There is a statistically significant difference in the proportions of errors between the control and test groups.
     
-    - Any observed difference in error rates between the control and test groups is NOT attributed to random chance or sampling variability.
+- Any observed difference in error rates between the control and test groups is NOT attributed to random chance or sampling variability.
 
   ####  Tenure Year
 
-    - The average client tenure between the control and test groups shows that there is no significant difference in the average tenure years between the two groups.
+- The average client tenure between the control and test groups shows that there is no significant difference in the average tenure years between the two groups.
     
-    - Both the control and test groups have similar average tenure years, indicating that the updated interface did not notably affect client tenure compared to the traditional process (represented by the control group).
+- Both the control and test groups have similar average tenure years, indicating that the updated interface did not notably affect client tenure compared to the traditional process (represented by the control group).
     
-    - Therefore, based on this observation, there isn't enough evidence to support rejecting the null hypothesis that the duration of clients does not significantly alter between the control and test groups.
+- Therefore, based on this observation, there isn't enough evidence to support rejecting the null hypothesis that the duration of clients does not significantly alter between the control and test groups.
 
 ## Conclusions Experiment Design
 
