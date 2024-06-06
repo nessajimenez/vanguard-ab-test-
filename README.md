@@ -50,22 +50,114 @@ Did the new design created by the Customer Experiment team successful in increas
   > Is the new design more "user friendly" so that clients don't have to go back to previous steps due to any confusion?
   > We believe in the new design clients won't have to go back to previous steps as much as in the control
 
-## Methodology
+## Methodology Used
 
-### Data Cleaning & Transformation
+  > Data Cleaning & Transformation
 
-### Performance Metrics (KPIs)
+  > Performance Metrics (KPIs)
 
-### Hypothesis Testing
+  > Hypothesis Testing
 
-### Experiment Evaluation
+  > Experiment Evaluation
 
-### Tableau
+  > Tableau
 
 ## Conclusions
 
-## Further Questions
+### Conclusions on Demographic Info
 
-## URLs (PPT, Trello, Tableau Page)
+After analyzing the clients' general demographic:
 
+  > The average age and client tenure are evenly distributed in both the control and test groups. On average, the clients were middle age (51-52 yo) and have been with the company for 15 years.
 
+  > Although male and female clients seem to be evenly distributed for both groups, there are too many clients with unknown gender for us to make any conclusions or corellations related to gender.
+
+  > Despite the number of unknown genders, we believe the clients were divided equally between the two designs in order to get the best results.
+
+### Conclusions for KPIs
+
+  #### > Completion Rate
+
+     - Although there was an increase in completion rate (3.7%) for the test group, it is not enough for it to be statistically significant and it did not exceed the 5% threshhold set by Vanguard.
+
+  #### > Abandonment Rate
+
+    - The amount of people lost at start and step 3 vs the other steps indicate these two pages/steps in the process need to be evaluated for improvements because they are contributing the most to abandonment.
+
+  #### > Time Spent on each Step
+
+    - In both variations, the average time spent on each step was longer as the client moved through the steps. This could be a defining factor if we want to reduce abandonment rate.
+    
+    - In the test group, the average time a client spent to reach confirmation was 9.7 minutes. However, the average time for the control group was 8.3 minutes. The main difference between the two groups is in the final (confirmation) step, which took much longer (on average) for the test group than it did for the control group.
+    
+    - It is important to note that, in both groups, for confirmation step had many null values, which affect the average time. Why is that? Was there something added to the test group once the client completed the steps? More information needs to be gathered to get a better understanding of the process.
+    
+    - From the data, we don't know if time spent on each step includes loading times. A good design should prioritize keeping loading times as small as possible. It would be interesting to collect data on loading times of the pages as part of the experiment.
+
+  #### > Error Rates
+
+    - We define interaction as: activity or engagement between the client and the step in the process being analyzed. So attempting step 3 4 times is one interaction.
+    
+    - We define error as an interaction with a step attempt higher than 1, indicating possible confusion or errors. So attempting step 3 4 times is considered an error.
+    
+    - We define non-error as an interaction with a step attempt equal to 1. So attempting step 3 one time is considered non-error, even if they abandon the process at that step.
+      
+      - The error rate for the test group is: 22.46%
+
+      - The error rate for the control group is: 19.61%
+
+    - The control group had a lower error rate than the test group, meaning the control group was less likely to visit a step more than once. This could be due to previous familiarity with the process, where in the test group the process has changes to what they're used to.
+    
+    - There is a statistically significant difference in the proportions of errors between the control and test groups.
+    
+    - Any observed difference in error rates between the control and test groups is NOT attributed to random chance or sampling variability.
+
+  #### > Tenure Year
+
+    - The average client tenure between the control and test groups shows that there is no significant difference in the average tenure years between the two groups.
+    
+    - Both the control and test groups have similar average tenure years, indicating that the updated interface did not notably affect client tenure compared to the traditional process (represented by the control group).
+    
+    - Therefore, based on this observation, there isn't enough evidence to support rejecting the null hypothesis that the duration of clients does not significantly alter between the control and test groups.
+
+    ## Conclusions Experiment Design
+
+After looking at all the data collected and our analysis as a whole:
+
+### Design Effectiveness Feedback
+   
+####  Experiment Structure:
+  
+   > The number of clients for each group should be the same. 
+
+      > - It simplifies analysis
+      
+      > - Minimizes bias (one group had more clients than the other)
+      
+      > - Ensures statistical power
+ 
+  > Why were there so many unknown genders?
+
+#### Duration Assessment
+   
+   > - Although a 3 month timeframe was enough to gather suffincient data for this particular experiment, a longer timeframe (6 months) would most likely provide more accurate numbers. 
+   
+   > - The most important factor to consider is the size of the sample the company wants to evaluate. 
+
+#### Additional Data Needs or Recomendations
+   
+   > - It would help to analyze the content and questions being displayed/requested in each step. 
+   
+   > - Is all the data being collected during the process necessary? 
+   
+   > - Are we making the client take more steps than needed or asking for duplicate info? Can we eliminate any steps and make the process shorter?
+   
+   > - Create a survey for customer feedback
+
+## URLs
+
+  > [Trello Page](https://trello.com/b/ML7qcsgb/ab-testing-project)
+
+  > [Presentation](https://docs.google.com/presentation/d/1pLHLWKppZoJPrDlbW2V0Y_iscmFyLrW0fJaK2npPG48/edit#slide=id.p)
+
+  > [Tableau](https://public.tableau.com/app/profile/daniela.rivera4024/viz/VanguardVisuals/AbandonmentRateTEST)
